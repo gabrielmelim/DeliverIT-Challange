@@ -10,6 +10,7 @@ Este projeto é uma API REST desenvolvida em Java com Spring Boot para gerenciar
 - Cálculo automático de multa e juros conforme dias de atraso
 - Persistência em banco de dados relacional
 - Testes unitários (não há testes de integração implementados)
+- **Documentação interativa via Swagger/OpenAPI**
 
 ## Tecnologias Utilizadas
 - Java 17+
@@ -20,6 +21,7 @@ Este projeto é uma API REST desenvolvida em Java com Spring Boot para gerenciar
 - Lombok
 - JUnit 5 & Mockito
 - Docker & Docker Compose
+- Springdoc OpenAPI (Swagger UI)
 
 ## Estrutura do Projeto
 ```
@@ -133,6 +135,14 @@ E então rode:
 ```
 
 > **Atenção:** Atualmente só existem testes unitários para a camada de serviço. Não há testes de integração implementados.
+
+## Documentação e Testes via Swagger
+A API possui documentação interativa gerada automaticamente pelo Swagger/OpenAPI. Você pode acessar e testar todos os endpoints diretamente pelo navegador:
+
+- [Swagger UI - http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+- [Swagger UI (alternativo) - http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+
+> Basta rodar a aplicação em qualquer profile e acessar um dos links acima.
 
 ## Observações
 - O projeto utiliza migrações Flyway para criar as tabelas automaticamente.
