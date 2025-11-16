@@ -1,0 +1,23 @@
+services:
+  db:
+    container_name: deliverit_db
+    image: postgres:16
+    environment:
+      POSTGRES_USER: deliverit
+      POSTGRES_PASSWORD: deliverit
+      POSTGRES_DB: deliverit
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    restart: always
+
+  app:
+    build: .
+    container_name: deliverit_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+volumes:
+  pg_data:
