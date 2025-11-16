@@ -1,0 +1,143 @@
+<div class="container">
+  <header class="header">
+    <h1>Contas a Pagar</h1>
+    <p>Landing page simples para cadastrar e listar contas.</p>
+  </header>
+
+  <!-- Alertas -->
+  <div *ngIf="erro" class="alert alert-error">
+    {{ erro }}
+  </div>
+  <div *ngIf="sucesso" class="alert alert-success">
+    {{ sucesso }}
+  </div>
+
+  <!-- Formulário -->
+  <section class="card card-form">
+    <h2>Cadastro de Conta</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-grid">
+
+        <div class="form-row">
+          <label for="name">Nome</label>
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
+            placeholder="Ex: Conta de Luz"
+          />
+          <small *ngIf="hasError('name', 'required')" class="error">
+            Nome é obrigatório.
+          </small>
+        </div>
+
+
+        <div class="form-row">
+          <label for="originalAmount">Valor Original</label>
+          <input
+            id="originalAmount"
+            type="number"
+            min="0.01"
+            step="0.01"
+            formControlName="originalAmount"
+            placeholder="Ex: 150.00"
+            autocomplete="off"
+            inputmode="decimal"
+          />
+          <small *ngIf="hasError('originalAmount', 'required')" class="error">
+            Valor é obrigatório.
+          </small>
+          <small *ngIf="hasError('originalAmount', 'min')" class="error">
+            Valor deve ser maior que zero.
+          </small>
+        </div>
+
+
+        <div class="form-row">
+          <label for="dueDate">Data de Vencimento</label>
+          <input
+            id="dueDate"
+            type="text"
+            formControlName="dueDate"
+            placeholder="dd/MM/aaaa"
+            maxlength="10"
+            pattern="\d{2}/\d{2}/\d{4}"
+          />
+          <small *ngIf="hasError('dueDate', 'required')" class="error">
+            Data de vencimento é obrigatória.
+          </small>
+        </div>
+
+
+        <div class="form-row">
+          <label for="paymentDate">Data de Pagamento</label>
+          <input
+            id="paymentDate"
+            type="text"
+            formControlName="paymentDate"
+            placeholder="dd/MM/aaaa"
+            maxlength="10"
+            pattern="\d{2}/\d{2}/\d{4}"
+          />
+          <small *ngIf="hasError('paymentDate', 'required')" class="error">
+            Data de pagamento é obrigatória.
+          </small>
+        </div>
+      </div>
+      <button type="submit" [disabled]="carregando">
+        {{ carregando ? 'Processando...' : 'Cadastrar Conta' }}
+      </button>
+    </form>
+  </section>
+
+  <!-- Lista -->
+  <section class="card card-list">
+    <h2>Contas Cadastradas</h2>
+
+    <input
+      type="text"
+      class="busca-conta"
+      placeholder="Buscar por nome"
+      [(ngModel)]="filtro"
+      (ngModelChange)="filtrarContas()"
+      style="margin-bottom: 1rem; width: 100%; max-width: 350px;"
+    />
+
+    <div *ngIf="carregando && !contasFiltradas.length">
+      Carregando contas...
+    </div>
+
+    <div class="table-responsive" *ngIf="contasFiltradas.length">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Valor Original</th>
+            <th>Valor Corrigido</th>
+            <th>Dias de Atraso</th>
+            <th>Pagamento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let conta of contasPaginadas">
+            <td>{{ conta.name }}</td>
+            <td>R$ {{ conta.originalAmount | number: '1.2-2' }}</td>
+            <td>R$ {{ conta.adjustedAmount | number: '1.2-2' }}</td>
+            <td>{{ conta.lateDays }}</td>
+            <td>{{ conta.paymentDate | date: 'dd/MM/yyyy' }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="paginacao">
+        <button (click)="mudarPagina(-1)" [disabled]="paginaAtual === 1">Anterior</button>
+        <span>Página {{ paginaAtual }} de {{ totalPaginas }}</span>
+        <button (click)="mudarPagina(1)" [disabled]="paginaAtual >= (contasFiltradas.length / itensPorPagina)">Próxima</button>
+      </div>
+    </div>
+
+    <p *ngIf="!contasFiltradas.length && !carregando">
+      Nenhuma conta cadastrada ainda.
+    </p>
+  </section>
+</div>
