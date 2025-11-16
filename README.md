@@ -73,7 +73,7 @@ Segundo a documentação oficial do desafio:
 Aqui estão os dois projetos
 
 ### 🔹 **Back-End (Java / Spring Boot)**  
-➡️[back-end]()
+➡️[back-end](https://github.com/gabrielmelim/DeliverIT-Challange/blob/main/back-end/README.md)
  
 ### 🔹 **Front-End (Angular)**  
 ➡️[front-end]()
@@ -83,8 +83,7 @@ Aqui estão os dois projetos
 ## 📄 Documento Oficial do Desafio
 
 Você pode baixar o PDF original aqui:
-
-👉 **[Download do Teste Prático Java (PDF)](./TestePraticoJava.pdf)**
+**[👉 Download do Teste Prático Java (PDF)](https://raw.githubusercontent.com/gabrielmelim/DeliverIT-Challange/main/Teste%20Pr%C3%A1tico%20Java.pdf)**
 
 ---
 
