@@ -76,7 +76,7 @@ Aqui estão os dois projetos
 ➡️[back-end](https://github.com/gabrielmelim/DeliverIT-Challange/blob/main/back-end/README.md)
  
 ### 🔹 **Front-End (Angular)**  
-➡️[front-end]()
+➡️[front-end](https://github.com/gabrielmelim/DeliverIT-Challange/blob/main/frontend/README.md)
 
 ---
 
